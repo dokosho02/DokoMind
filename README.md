@@ -1,7 +1,6 @@
 # DokoMind
 
 This project is forked from [My Mind](https://github.com/ondras/my-mind/) and modified.
-![Screenshot](screenshot.png)
 
 DokoMind is a web application for creating and managing Mind maps. It is free to use and you can fork its source code. It is distributed under the terms of the MIT license.
 
