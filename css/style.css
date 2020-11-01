@@ -11,7 +11,8 @@ html, body {
 	margin: 0;
 	overflow: hidden;
 	height: 100%;
-	background-color: #eed;
+/* 	background-color: #eed; */
+	background-color:	#030303;
 	-webkit-user-select: none; /* no magnifier on hold */
 }
 
