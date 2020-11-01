@@ -818,6 +818,8 @@ MM.Item.prototype._getAutoShape = function() {
 	switch (depth) {
 		case 0: return MM.Shape.Ellipse;
 		case 1: return MM.Shape.Box;
+		case 2: return MM.Shape.Cloud;    //
+		case 3: return MM.Shape.TV;    //
 		default: return MM.Shape.Underline;
 	}
 }
@@ -2907,6 +2909,17 @@ MM.Shape.Ellipse = Object.create(MM.Shape, {
 	id: {value: "ellipse"},
 	label: {value: "Ellipse"}
 });
+//
+MM.Shape.Cloud = Object.create(MM.Shape, {
+	id: {value: "cloud"},
+	label: {value: "Cloud"}
+});
+
+MM.Shape.TV = Object.create(MM.Shape, {
+	id: {value: "tv"},
+	label: {value: "TV"}
+});
+//
 MM.Format = Object.create(MM.Repo, {
 	extension: {value:""},
 	mime: {value:""}
@@ -3970,8 +3983,10 @@ MM.UI.Shape = function() {
 	
 	this._select.appendChild(MM.Shape.Box.buildOption());
 	this._select.appendChild(MM.Shape.Ellipse.buildOption());
+	this._select.appendChild(MM.Shape.Cloud.buildOption());  //
+	this._select.appendChild(MM.Shape.TV.buildOption());  //
 	this._select.appendChild(MM.Shape.Underline.buildOption());
-	
+
 	this._select.addEventListener("change", this);
 }
 
