@@ -26,6 +26,8 @@
 	border-top: 1px solid #666;
 	margin-top: 4px;
 	padding-top: 4px;
+	overflow-y: auto;
+
 }
 
 #menu .ui select.fa-select, .ui select.fa-select option {
