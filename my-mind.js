@@ -820,7 +820,8 @@ MM.Item.prototype._getAutoShape = function() {
 		case 1: return MM.Shape.Box;
 		case 2: return MM.Shape.Cloud;    //
 		case 3: return MM.Shape.TV;    //
-		default: return MM.Shape.Underline;
+		// case 4: return MM.Shape.Zigzag;    //
+		default: return MM.Shape.Box;
 	}
 }
 
@@ -964,7 +965,7 @@ MM.Item.prototype._findLinks = function(node) {
 }
 MM.Map = function(options) {
 	var o = {
-		root: "My Mind Map",
+		root: "Root",
 		layout: MM.Layout.Map
 	}
 	for (var p in options) { o[p] = options[p]; }
@@ -1781,7 +1782,7 @@ MM.Command.InsertChild.execute = function() {
 
 MM.Command.Delete = Object.create(MM.Command, {
 	label: {value: "Delete an item"},
-	keys: {value: [{keyCode: MM.isMac() ? 8 : 46}]} // Mac keyboards' "delete" button generates 8 (backspace)
+	keys: {value: [{keyCode: 68, ctrlKey:true}]} // Mac keyboards' "delete" button generates 8 (backspace)
 });
 MM.Command.Delete.isValid = function() {
 	return MM.Command.isValid.call(this) && !MM.App.current.isRoot();
@@ -1849,7 +1850,7 @@ MM.Command.Load.execute = function() {
 
 MM.Command.Center = Object.create(MM.Command, {
 	label: {value: "Center map"},
-	keys: {value: [{keyCode: 35}]}
+	keys: {value: [{keyCode: 69}]}
 });
 MM.Command.Center.execute = function() {
 	MM.App.map.center();
@@ -1868,7 +1869,7 @@ MM.Command.New.execute = function() {
 
 MM.Command.ZoomIn = Object.create(MM.Command, {
 	label: {value: "Zoom in"},
-	keys: {value: [{charCode:"+".charCodeAt(0)}]}
+	keys: {value: [{charCode:"=".charCodeAt(0)}]}
 });
 MM.Command.ZoomIn.execute = function() {
 	MM.App.adjustFontSize(1);
@@ -1884,7 +1885,7 @@ MM.Command.ZoomOut.execute = function() {
 
 MM.Command.Help = Object.create(MM.Command, {
 	label: {value: "Show/hide help"},
-	keys: {value: [{charCode: "?".charCodeAt(0)}]}
+	keys: {value: [{charCode: "/".charCodeAt(0)}]}
 });
 MM.Command.Help.execute = function() {
 	MM.App.help.toggle();
@@ -1892,7 +1893,7 @@ MM.Command.Help.execute = function() {
 
 MM.Command.UI = Object.create(MM.Command, {
 	label: {value: "Show/hide UI"},
-	keys: {value: [{charCode: "*".charCodeAt(0)}]}
+	keys: {value: [{charCode: "\\".charCodeAt(0)}]}
 });
 MM.Command.UI.execute = function() {
 	MM.App.ui.toggle();
@@ -2171,7 +2172,7 @@ MM.Command.Select.execute = function(e) {
 
 MM.Command.SelectRoot = Object.create(MM.Command, {
 	label: {value: "Select root"},
-	keys: {value: [{keyCode: 36}]}
+	keys: {value: [{keyCode: 82}]}
 });
 MM.Command.SelectRoot.execute = function() {
 	var item = MM.App.current;
@@ -2918,6 +2919,10 @@ MM.Shape.Cloud = Object.create(MM.Shape, {
 MM.Shape.TV = Object.create(MM.Shape, {
 	id: {value: "tv"},
 	label: {value: "TV"}
+});
+MM.Shape.Zigzag = Object.create(MM.Shape, {
+	id: {value: "zigzag"},
+	label: {value: "Zigzag"}
 });
 //
 MM.Format = Object.create(MM.Repo, {
@@ -3856,6 +3861,11 @@ MM.Backend.GDrive._auth = function(forceUI) {
 
 	return promise;
 }
+
+
+//
+// The Layout
+//
 MM.UI = function() {
 	this._node = document.querySelector(".ui");
 	
@@ -3874,7 +3884,7 @@ MM.UI = function() {
 	this._node.addEventListener("click", this);
 	this._node.addEventListener("change", this);
 
-	this.toggle();
+	// this.toggle();
 }
 
 MM.UI.prototype.handleMessage = function(message, publisher) {
@@ -3985,7 +3995,8 @@ MM.UI.Shape = function() {
 	this._select.appendChild(MM.Shape.Ellipse.buildOption());
 	this._select.appendChild(MM.Shape.Cloud.buildOption());  //
 	this._select.appendChild(MM.Shape.TV.buildOption());  //
-	this._select.appendChild(MM.Shape.Underline.buildOption());
+	// this._select.appendChild(MM.Shape.Zigzag.buildOption());
+	// this._select.appendChild(MM.Shape.Underline.buildOption());
 
 	this._select.addEventListener("change", this);
 }
@@ -4081,8 +4092,8 @@ MM.UI.Help = function() {
 		32: "Spacebar",
 		33: "PgUp",
 		34: "PgDown",
-		35: "End",
-		36: "Home",
+		69: "E",
+		82: "R",
 		37: "←",
 		38: "↑",
 		39: "→",
@@ -5346,7 +5357,7 @@ MM.App = {
 
 			case "item-change":
 				if (publisher.isRoot() && publisher.getMap() == this.map) {
-					document.title = this.map.getName() + " :: My Mind";
+					document.title = "DM - " + this.map.getName();
 				}
 			break;
 		}
