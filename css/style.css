@@ -9,12 +9,13 @@
 
 html, body {
 	margin: 0;
-	overflow: hidden;
+	/* overflow: hidden; */
 	height: 100%;
-/* 	background-color: #eed; */
+	/* background-color: #eed; */
 	background-color:	#030303;
 	-webkit-user-select: none; /* no magnifier on hold */
 }
+
 
 [contenteditable] { /* allow for editable items */
 	-webkit-user-select: auto;
@@ -60,7 +61,7 @@ ul {
 }
 
 #tip:before {
-	content: "Tip: ";
+	content: "";
 }
 
 #tip code {
