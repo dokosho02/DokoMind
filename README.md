@@ -11,4 +11,4 @@ New to Mind maps? They are useful, aesthetic and cool! Read more about these spe
 # New Features
 - Changing the app to dark mode;
 - Adding more Shapes;
-- Adding a `Insert a child` button in the bottom to increase the efficiency of input on devices without physical keyboard.
+- Adding a button (`Insert a child`) in the bottom to increase the efficiency of input on devices without physical keyboard.
