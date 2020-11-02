@@ -1051,8 +1051,6 @@
 			<span></span>
 			<button data-command="InsertChild"></button>
 			<button data-command="InsertSibling"></button>
-			<!-- <button data-command="Swap"></button> -->
-			<!-- <button data-command="Side"></button> -->
 			<button data-command="Delete"></button>
 			<span></span>
 			<button data-command="Center"></button>
@@ -1069,11 +1067,15 @@
 			<button data-command="UI"></button>
 			<button data-command="Help"></button>
 			<button data-command="Notes"></button>
-
-
-			
 		</div>
+
+		<div id="cs">
+			<button data-command="InsertChild"></button>
+			<button data-command="InsertSibling"></button>
+		</div>
+
 		<script>
+
 			window.onload = function() {
 				MM.App.init();
 				MM.App.io.restore();
