@@ -1694,6 +1694,57 @@ MM.Menu = {
 	}
 }
 
+MM.CS = {
+	_dom: {},
+	_port: null,
+
+	open: function(x, y) {
+		MM.subscribe("CS", this);
+		// this._dom.node.style.display = true;
+		// var w = this._dom.node.offsetWidth;
+		// var h = this._dom.node.offsetHeight;
+
+		// var left = x;
+		// var top = y;
+
+		// if (left > this._port.offsetWidth / 2) { left -= w; }
+		// if (top > this._port.offsetHeight / 2) { top -= h; }
+
+		// this._dom.node.style.left = left+"px";
+		// this._dom.node.style.top = top+"px";
+	},
+	
+	handleEvent: function(e) {
+
+		
+		e.stopPropagation(); /* no dragdrop, no blur of activeElement */
+		e.preventDefault(); /* we do not want to focus the button */
+		
+		var command = e.target.getAttribute("data-command");
+		if (!command) { return; }
+
+		command = MM.Command[command];
+		if (!command.isValid()) { return; }
+
+		command.execute();
+		// this.close();
+	},
+	
+	init: function(port) {
+		this._port = port;
+		this._dom.node = document.querySelector("#cs");
+		var buttons = this._dom.node.querySelectorAll("[data-command]");
+		[].slice.call(buttons).forEach(function(button) {
+			button.innerHTML = MM.Command[button.getAttribute("data-command")].label;
+		});
+		
+		this._port.addEventListener("mousedown", this);
+		this._dom.node.addEventListener("mousedown", this);
+		
+		// this.close();
+	}
+}
+
 MM.Command = Object.create(MM.Repo, {
 	keys: {value: []},
 	editMode: {value: false},
@@ -3868,7 +3919,6 @@ MM.Backend.GDrive._auth = function(forceUI) {
 //
 MM.UI = function() {
 	this._node = document.querySelector(".ui");
-	
 	this._toggle = this._node.querySelector("#toggle");
 
 	this._layout = new MM.UI.Layout();
@@ -3885,6 +3935,7 @@ MM.UI = function() {
 	this._node.addEventListener("change", this);
 
 	// this.toggle();
+
 }
 
 MM.UI.prototype.handleMessage = function(message, publisher) {
@@ -4973,7 +5024,7 @@ MM.UI.Backend.GDrive._loadDone = function(data) {
 	MM.UI.Backend._loadDone.call(this, json);
 }
 MM.Mouse = {
-	TOUCH_DELAY: 300,
+	TOUCH_DELAY: 300,    /* 500 */
 	_port: null,
 	_cursor: [0, 0],
 	_pos: [0, 0], /* ghost pos */
@@ -5413,6 +5464,7 @@ MM.App = {
 		MM.Tip.init();
 		MM.Keyboard.init();
 		MM.Menu.init(this._port);
+		MM.CS.init(this._port);
 		MM.Mouse.init(this._port);
 		MM.Clipboard.init();
 
