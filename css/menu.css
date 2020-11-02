@@ -4,7 +4,7 @@
 	border: 1px solid #666;
 	background-color: #fff;	
 	box-shadow: 0 0 2px 1px #666;
-	overflow: auto;
+	overflow-y: auto;
 
 }
 
@@ -31,5 +31,41 @@
 }
 
 #menu .ui select.fa-select, .ui select.fa-select option {
+	font-size: 13px;
+}
+
+
+#cs {
+	position: absolute;
+	left:44.5%;
+	right: 44.8%;
+	top: 0;
+	bottom: 89%;
+	z-index: 1;
+	border: 1px solid #666;
+	background-color: #fff;	
+	box-shadow: 0 0 2px 1px #666;
+	overflow-y: auto;
+}
+
+
+#cs button {
+	display: block;
+	background-color: transparent;
+	border: 1px solid #666;
+	margin: 10px;
+
+	padding: 3px 6px;
+	font-size: 15px;
+	width: 130px;
+	height: 30px;
+	text-align: left;
+}
+
+#cs button:hover {
+	font-weight: bold;
+}
+
+#cs .ui select.fa-select, .ui select.fa-select option {
 	font-size: 13px;
 }
