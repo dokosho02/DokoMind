@@ -40,18 +40,18 @@
 	left:44.5%;
 	right: 44.8%;
 	top: 0;
-	bottom: 89%;
+	bottom: 94%;
 	z-index: 1;
 	border: 1px solid #666;
-	background-color: #fff;	
+	background-color: rgba(255, 255, 255, 0.7);	
 	box-shadow: 0 0 2px 1px #666;
-	overflow-y: auto;
+	overflow: auto;
 }
 
 
 #cs button {
 	display: block;
-	background-color: transparent;
+	background-color: #fff;
 	border: 1px solid #666;
 	margin: 10px;
 
@@ -59,7 +59,7 @@
 	font-size: 15px;
 	width: 130px;
 	height: 30px;
-	text-align: left;
+	text-align: center;
 }
 
 #cs button:hover {
