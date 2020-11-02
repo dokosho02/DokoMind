@@ -7,3 +7,8 @@ DokoMind is a web application for creating and managing Mind maps. It is free to
 New to Mind maps? They are useful, aesthetic and cool! Read more about these special diagrams in [the Wikipedia article](http://en.wikipedia.org/wiki/Mind_map).
 
 * [Official web page](https://github-doko.github.io/DokoMind/)
+
+# New Features
+- Changing the app to dark mode;
+- Adding more Shapes;
+- Adding a `Insert a child` button in the bottom to increase the efficiency of input on mobile phone.
