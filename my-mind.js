@@ -4973,7 +4973,7 @@ MM.UI.Backend.GDrive._loadDone = function(data) {
 	MM.UI.Backend._loadDone.call(this, json);
 }
 MM.Mouse = {
-	TOUCH_DELAY: 500,
+	TOUCH_DELAY: 300,
 	_port: null,
 	_cursor: [0, 0],
 	_pos: [0, 0], /* ghost pos */
