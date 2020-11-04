@@ -1796,7 +1796,7 @@ MM.Command.Redo.execute = function() {
 
 MM.Command.InsertSibling = Object.create(MM.Command, {
 	label: {value: "Insert a sibling"},
-	keys: {value: [{keyCode: 13}]}
+	keys: {value: [{keyCode: 80}]}
 });
 MM.Command.InsertSibling.execute = function() {
 	var item = MM.App.current;
@@ -2096,7 +2096,7 @@ MM.Command.Newline = Object.create(MM.Command, {
 		{keyCode: 13, shiftKey:true},
 		{keyCode: 13, ctrlKey:true},
 		// {keyCode: 73},
-		{keyCode:84}
+		{keyCode: 56}
 	]},
 	editMode: {value: true}
 });
