@@ -1818,7 +1818,8 @@ MM.Command.InsertChild = Object.create(MM.Command, {
 	label: {value: "Insert a child"},
 	keys: {value: [
 		{keyCode: 9, ctrlKey:false},
-		{keyCode: 45}
+		{keyCode: 45},
+		{keyCode: 81}
 	]}
 });
 MM.Command.InsertChild.execute = function() {
@@ -1846,31 +1847,39 @@ MM.Command.Delete.execute = function() {
 MM.Command.Swap = Object.create(MM.Command, {
 	label: {value: "Swap sibling"},
 	keys: {value: [
-		{keyCode: 38, ctrlKey:true},
-		{keyCode: 40, ctrlKey:true},
+		// {keyCode: 38, ctrlKey:true},
+		// {keyCode: 40, ctrlKey:true},
+		{keyCode: 73},
+		{keyCode: 75}
 	]}
 });
 MM.Command.Swap.execute = function(e) {
 	var current = MM.App.current;
 	if (current.isRoot() || current.getParent().getChildren().length < 2) { return; }
 
-	var diff = (e.keyCode == 38 ? -1 : 1);
+	var diff = (e.keyCode == 73 ? -1 : 1 );
 	var action = new MM.Action.Swap(MM.App.current, diff);
 	MM.App.action(action);
+
+	// var diff2 = (e.keyCode == 73 ? -1 : 1);
+	// var action2 = new MM.Action.Swap(MM.App.current, diff2);
+	// MM.App.action(action2);
 }
 
 MM.Command.Side = Object.create(MM.Command, {
 	label: {value: "Change side"},
 	keys: {value: [
-		{keyCode: 37, ctrlKey:true},
-		{keyCode: 39, ctrlKey:true},
+		// {keyCode: 37, ctrlKey:true},
+		// {keyCode: 39, ctrlKey:true},
+		{keyCode: 74},
+		{keyCode: 76}
 	]}
 });
 MM.Command.Side.execute = function(e) {
 	var current = MM.App.current;
 	if (current.isRoot() || !current.getParent().isRoot()) { return; }
 
-	var side = (e.keyCode == 37 ? "left" : "right");
+	var side = (e.keyCode == 74 ? "left" : "right");
 	var action = new MM.Action.SetSide(MM.App.current, side);
 	MM.App.action(action);
 }
@@ -1920,7 +1929,10 @@ MM.Command.New.execute = function() {
 
 MM.Command.ZoomIn = Object.create(MM.Command, {
 	label: {value: "Zoom in"},
-	keys: {value: [{charCode:"=".charCodeAt(0)}]}
+	keys: {value: [
+		{charCode:"=".charCodeAt(0)},
+		{keyCode: 72}
+		]}
 });
 MM.Command.ZoomIn.execute = function() {
 	MM.App.adjustFontSize(1);
@@ -1928,7 +1940,10 @@ MM.Command.ZoomIn.execute = function() {
 
 MM.Command.ZoomOut = Object.create(MM.Command, {
 	label: {value: "Zoom out"},
-	keys: {value: [{charCode:"-".charCodeAt(0)}]}
+	keys: {value: [
+		{charCode:"-".charCodeAt(0)},
+		{keyCode: 71}
+	]}
 });
 MM.Command.ZoomOut.execute = function() {
 	MM.App.adjustFontSize(-1);
@@ -2079,7 +2094,9 @@ MM.Command.Newline = Object.create(MM.Command, {
 	label: {value: "Line break"},
 	keys: {value: [
 		{keyCode: 13, shiftKey:true},
-		{keyCode: 13, ctrlKey:true}
+		{keyCode: 13, ctrlKey:true},
+		// {keyCode: 73},
+		{keyCode:84}
 	]},
 	editMode: {value: true}
 });
