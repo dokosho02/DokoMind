@@ -135,7 +135,8 @@ button:not(:disabled) {
 }
 
 #notes {
-	width: 50%;
+	width: 20%;
+	height: 40%;
 }
 
 #notes-editor {

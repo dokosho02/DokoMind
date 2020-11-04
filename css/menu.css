@@ -36,11 +36,11 @@
 
 
 #cs {
-	position: absolute;
+	position: fixed;
 	left:44.5%;
 	right: 44.8%;
 	top: 94%;
-	bottom: 0;
+	bottom: 0%;
 	z-index: 1;
 	border: 1px solid #666;
 	background-color: rgba(255, 255, 255, 0.7);	
