@@ -2095,7 +2095,7 @@ MM.Command.Newline = Object.create(MM.Command, {
 	keys: {value: [
 		{keyCode: 13, shiftKey:true},
 		{keyCode: 13, ctrlKey:true}
-		// {keyCode: 73},
+		{keyCode: "*".charCodeAt(0)}
 // 		{keyCode: 56}
 	]},
 	editMode: {value: true}
