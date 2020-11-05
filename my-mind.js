@@ -2094,9 +2094,10 @@ MM.Command.Newline = Object.create(MM.Command, {
 	label: {value: "Line break"},
 	keys: {value: [
 		{keyCode: 13, shiftKey:true},
-		{keyCode: 13, ctrlKey:true}
-		{keyCode: "*".charCodeAt(0)}
-// 		{keyCode: 56}
+		{keyCode: 13, ctrlKey:true},
+		{keyCode: "*".charCodeAt(0) }
+		// {keyCode: 73},
+		// {keyCode: 56}
 	]},
 	editMode: {value: true}
 });
