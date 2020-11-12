@@ -21,16 +21,17 @@
 
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-383250-18"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-383250-18');
+<script> // commented by Doko
+//   window.dataLayer = window.dataLayer || [];
+//   function gtag(){dataLayer.push(arguments);}
+//   gtag('js', new Date());
+
+//   gtag('config', 'UA-383250-18');
 </script>
 
-	
 	</head>
+	
 	<body>
 		<ul id="port">
 			<div id="tip"></div>
@@ -1069,32 +1070,32 @@
 			<button data-command="Help"></button>
 		</div>
 
-		<div id="cs">
-			<button data-command="InsertChild"></button>
-			<!-- <button data-command="InsertSibling"></button> -->
-		</div>
+		<!-- <div id="cs">
+		</div> -->
 
 		<script>
 
-			window.onload = function() {
+			window.onload = function() {  // onload Event - Execute a JavaScript immediately after a page has been loaded
 				MM.App.init();
 				MM.App.io.restore();
 
-				window.editor = {
-					postMessage: function(action, value) {
-						var iframeElm = document.getElementById('notes-editor');
-						iframeElm.contentWindow.postMessage({
-							action: action,
-							value: value
-						}, '*');
-					},
-					setContent: function(html) {
-						this.postMessage('setContent', html);
-					},
-					getContent: function() {
-						return this.postMessage('getContent');
-					}
-				};
+				// commented by Doko
+
+				// window.editor = {
+				// 	postMessage: function(action, value) {
+				// 		var iframeElm = document.getElementById('notes-editor');
+				// 		iframeElm.contentWindow.postMessage({
+				// 			action: action,
+				// 			value: value
+				// 		}, '*');
+				// 	},
+				// 	setContent: function(html) {
+				// 		this.postMessage('setContent', html);
+				// 	},
+				// 	getContent: function() {
+				// 		return this.postMessage('getContent');
+				// 	}
+				// };
 
 			}
 		</script>

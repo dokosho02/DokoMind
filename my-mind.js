@@ -9,7 +9,7 @@ if (!Function.prototype.bind) {
 	}
 };
 
-var MM = {
+let MM = {
 	_subscribers: {},
 
 	publish: function(message, publisher, data) {
@@ -45,6 +45,7 @@ var MM = {
 		return !!navigator.platform.match(/mac/i);
 	}
 };
+
 /*
 	Any copyright is dedicated to the Public Domain.
 	http://creativecommons.org/publicdomain/zero/1.0/
@@ -816,11 +817,12 @@ MM.Item.prototype._getAutoShape = function() {
 		node = node.getParent();
 	}
 	switch (depth) {
-		case 0: return MM.Shape.Ellipse;
+		case 0: return MM.Shape.TV;
 		case 1: return MM.Shape.Box;
 		case 2: return MM.Shape.Cloud;    //
 		case 3: return MM.Shape.TV;    //
-		// case 4: return MM.Shape.Zigzag;    //
+		case 4: return MM.Shape.Box;    //
+		case 5: return MM.Shape.Cloud;    //
 		default: return MM.Shape.Box;
 	}
 }
@@ -1267,34 +1269,36 @@ MM.Keyboard._keyOK = function(key, e) {
 	}
 	return true;
 }
-MM.Tip = {
-	_node: null,
 
-	handleEvent: function() {
-		this._hide();
-	},
+// MM.Tip = {
+// 	_node: null,
 
-	handleMessage: function() {
-		this._hide();
-	},
+// 	handleEvent: function() {
+// 		this._hide();
+// 	},
 
-	init: function() {
-		this._node = document.querySelector("#tip");
-		this._node.addEventListener("click", this);
+// 	handleMessage: function() {
+// 		this._hide();
+// 	},
 
-		MM.subscribe("command-child", this);
-		MM.subscribe("command-sibling", this);
-	},
+// 	init: function() {
+// 		this._node = document.querySelector("#tip");
+// 		this._node.addEventListener("click", this);
 
-	_hide: function() {
-		MM.unsubscribe("command-child", this);
-		MM.unsubscribe("command-sibling", this);
+// 		MM.subscribe("command-child", this);
+// 		MM.subscribe("command-sibling", this);
+// 	},
 
-		this._node.removeEventListener("click", this);
-		this._node.classList.add("hidden");
-		this._node = null;
-	}
-}
+// 	_hide: function() {
+// 		MM.unsubscribe("command-child", this);
+// 		MM.unsubscribe("command-sibling", this);
+
+// 		this._node.removeEventListener("click", this);
+// 		this._node.classList.add("hidden");
+// 		this._node = null;
+// 	}
+// }
+
 MM.Action = function() {}
 MM.Action.prototype.perform = function() {}
 MM.Action.prototype.undo = function() {}
@@ -1694,56 +1698,56 @@ MM.Menu = {
 	}
 }
 
-MM.CS = {
-	_dom: {},
-	_port: null,
+// MM.CS = {
+// 	_dom: {},
+// 	_port: null,
 
-	open: function(x, y) {
-		MM.subscribe("CS", this);
-		// this._dom.node.style.display = true;
-		// var w = this._dom.node.offsetWidth;
-		// var h = this._dom.node.offsetHeight;
+// 	open: function(x, y) {
+// 		MM.subscribe("CS", this);
+// 		// this._dom.node.style.display = true;
+// 		// var w = this._dom.node.offsetWidth;
+// 		// var h = this._dom.node.offsetHeight;
 
-		// var left = x;
-		// var top = y;
+// 		// var left = x;
+// 		// var top = y;
 
-		// if (left > this._port.offsetWidth / 2) { left -= w; }
-		// if (top > this._port.offsetHeight / 2) { top -= h; }
+// 		// if (left > this._port.offsetWidth / 2) { left -= w; }
+// 		// if (top > this._port.offsetHeight / 2) { top -= h; }
 
-		// this._dom.node.style.left = left+"px";
-		// this._dom.node.style.top = top+"px";
-	},
+// 		// this._dom.node.style.left = left+"px";
+// 		// this._dom.node.style.top = top+"px";
+// 	},
 	
-	handleEvent: function(e) {
+// 	handleEvent: function(e) {
 
 		
-		e.stopPropagation(); /* no dragdrop, no blur of activeElement */
-		e.preventDefault(); /* we do not want to focus the button */
+// 		e.stopPropagation(); /* no dragdrop, no blur of activeElement */
+// 		e.preventDefault(); /* we do not want to focus the button */
 		
-		var command = e.target.getAttribute("data-command");
-		if (!command) { return; }
+// 		var command = e.target.getAttribute("data-command");
+// 		if (!command) { return; }
 
-		command = MM.Command[command];
-		if (!command.isValid()) { return; }
+// 		command = MM.Command[command];
+// 		if (!command.isValid()) { return; }
 
-		command.execute();
-		// this.close();
-	},
+// 		command.execute();
+// 		// this.close();
+// 	},
 	
-	init: function(port) {
-		this._port = port;
-		this._dom.node = document.querySelector("#cs");
-		var buttons = this._dom.node.querySelectorAll("[data-command]");
-		[].slice.call(buttons).forEach(function(button) {
-			button.innerHTML = MM.Command[button.getAttribute("data-command")].label;
-		});
+// 	init: function(port) {
+// 		this._port = port;
+// 		this._dom.node = document.querySelector("#cs");
+// 		var buttons = this._dom.node.querySelectorAll("[data-command]");
+// 		[].slice.call(buttons).forEach(function(button) {
+// 			button.innerHTML = MM.Command[button.getAttribute("data-command")].label;
+// 		});
 		
-		this._port.addEventListener("mousedown", this);
-		this._dom.node.addEventListener("mousedown", this);
+// 		this._port.addEventListener("mousedown", this);
+// 		this._dom.node.addEventListener("mousedown", this);
 		
-		// this.close();
-	}
-}
+// 		// this.close();
+// 	}
+// }
 
 MM.Command = Object.create(MM.Repo, {
 	keys: {value: []},
@@ -2787,13 +2791,15 @@ MM.Layout.Map = Object.create(MM.Layout.Graph, {
 MM.Layout.ALL.push(MM.Layout.Map);
 
 MM.Layout.Map.update = function(item) {
-	if (item.isRoot()) {
-		this._layoutRoot(item);
-	} else {
-		var side = this.getChildDirection(item);
-		var name = side.charAt(0).toUpperCase() + side.substring(1);
-		MM.Layout.Graph[name].update(item);
-	}
+	this._layoutRoot(item);
+
+	// if (item.isRoot()) {
+	// 	this._layoutRoot(item);
+	// } else {
+	// 	var side = this.getChildDirection(item);
+	// 	var name = side.charAt(0).toUpperCase() + side.substring(1);
+	// 	MM.Layout.Graph[name].update(item);
+	// }
 }
 
 /**
@@ -2895,7 +2901,14 @@ MM.Layout.Map._drawRootConnectors = function(item, side, children) {
 
 	var x1 = dom.content.offsetLeft + dom.content.offsetWidth/2;
 	var y1 = item.getShape().getVerticalAnchor(item);
-	var half = this.LINE_THICKNESS/2;
+	
+	// determine the linewidth
+	let half;
+	if (item.isRoot()) {
+		half = this.LINE_THICKNESS*2;
+	} else {
+		half = this.LINE_THICKNESS/1;
+	}
 
 	for (var i=0;i<children.length;i++) {
 		var child = children[i];
@@ -2906,11 +2919,28 @@ MM.Layout.Map._drawRootConnectors = function(item, side, children) {
 		var dx = Math.cos(angle) * half;
 		var dy = Math.sin(angle) * half;
 
+		let x3 = (x2+x1)/2
+		let y3 = (y2+y1)/2
+
 		ctx.fillStyle = ctx.strokeStyle = child.getColor();
 		ctx.beginPath();
-		ctx.moveTo(x1-dx, y1-dy);
-		ctx.quadraticCurveTo((x2+x1)/2, y2, x2, y2);
-		ctx.quadraticCurveTo((x2+x1)/2, y2, x1+dx, y1+dy);
+
+		ctx.moveTo(x1-dx, y1-dy);                      // start point - some offset at the parent
+		ctx.quadraticCurveTo(x3, y1, x3-dx/4, y3-dy/4);          // to center point
+		ctx.quadraticCurveTo(x3, y2, x2, y2);    // to child
+
+		// ctx.moveTo(x2, y2-dy/2);
+		ctx.quadraticCurveTo(x3, y2, x3+dx/4, y3+dy/4);
+		ctx.quadraticCurveTo(x3, y1, x1+dx, y1+dy);    // to parent
+		
+		// ctx.moveTo(x1-dx, y1-dy);                      // start point - some offset at the parent
+		// ctx.quadraticCurveTo(x3, y1, x3-dx/4, y3-dy/4);          // to center point
+		// ctx.quadraticCurveTo(x3, y2, x2, y2);    // to child
+
+		// // ctx.moveTo(x2, y2-dy/2);
+		// ctx.quadraticCurveTo(x3, y2, x3+dx/4, y3+dy/4);
+		// ctx.quadraticCurveTo(x3, y1, x1+dx, y1+dy);    // to parent
+		
 		ctx.fill();
 		ctx.stroke();
 	}
@@ -5372,7 +5402,7 @@ MM.App = {
 	portSize: [0, 0],
 	map: null,
 	ui: null,
-	io: null,
+		io: null,
 	help: null,
 	_port: null,
 	_throbber: null,
@@ -5479,10 +5509,10 @@ MM.App = {
 		this.help = new MM.UI.Help();
 		this.notes = new MM.UI.Notes();
 
-		MM.Tip.init();
+		// MM.Tip.init();
 		MM.Keyboard.init();
 		MM.Menu.init(this._port);
-		MM.CS.init(this._port);
+		// MM.CS.init(this._port);
 		MM.Mouse.init(this._port);
 		MM.Clipboard.init();
 
