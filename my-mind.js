@@ -5118,7 +5118,12 @@ MM.Mouse.handleEvent = function(e) {
 		break;
 
 		case "touchstart":
-			if (e.touches.length > 1) { return; }
+// 			if (e.touches.length > 1) { return; }
+			
+			if (e.touches.length > 1) { 
+			    alert("Multi-touches?");
+			}
+			
 			e.clientX = e.touches[0].clientX;
 			e.clientY = e.touches[0].clientY;
 		case "mousedown":
