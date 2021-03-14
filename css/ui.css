@@ -123,8 +123,8 @@ button:not(:disabled) {
 .ui [data-color] {
 	display: block;
 	float: left;
-	width: 14px;
-	height: 14px;
+	width: 18px;
+	height: 12px;
 	border-radius: 3px;
 	margin-right: 2px;
 	border: 1px solid transparent;

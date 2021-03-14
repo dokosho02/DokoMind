@@ -1,12 +1,17 @@
+:root {
+	--nodebg: #f2d7ac;
+	--currentbg: #caba02;
+  }
+
 .shape-box > .content {
-	background-color: #fff;
-	border: 1px solid #666;
+	background-color: var(--nodebg);
+	border: 1px solid rgb(224, 210, 210);
 	border-radius: 3px;
 	padding: 0.15em 0.4em;
 }
 
 .shape-ellipse > .content {
-	background-color: #fff;
+	background-color: var(--nodebg);
 	border: 1px solid #666;
 	border-radius: 48% / 50%;
 	padding: 1em 0.5em;
@@ -14,14 +19,14 @@
 
 /* cloud */
 .shape-cloud > .content {
-	background-color: #fff;
+	background-color: var(--nodebg);
 	border: 1px solid #666;
 	border-radius: 30px;
 	padding: 0.3em 0.3em;
 }
 
 .shape-tv > .content {
-	background-color: #fff;
+	background-color: var(--nodebg);
 	border: 1px solid #666;
 	padding: 0.3em 0.3em;
 	border-radius: 50% / 10%;
@@ -35,7 +40,7 @@
 	background-position: left bottom;
 	background-repeat: repeat-x;
 
-	background-color: #fff;
+	background-color: var(--nodebg);
 	background-size: 0.5em 0.5em;
 	padding: 0.3em 0.3em 0.5em 0.3em;
 
@@ -44,7 +49,7 @@
 /* current */
 
 .current > .content {
-	background-color: rgba(255, 255, 187, 0.9);
+	background-color: var(--currentbg);
 }
 
 /* root */
