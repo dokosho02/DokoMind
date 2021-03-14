@@ -5092,6 +5092,22 @@ MM.Mouse.init = function(port) {
 	this._port.addEventListener("wheel", this);
 	this._port.addEventListener("mousewheel", this);
 	this._port.addEventListener("contextmenu", this);
+	this._port.addEventListener('gestureend', function(e) {
+		
+		var dir = 0;
+		if (e.scale < 1.0) {
+			// User moved fingers closer together
+			dir = -1;
+		} else if (e.scale > 1.0) {
+			// User moved fingers further apart
+			dir = 1;
+		}
+
+		if (dir) {
+			MM.App.adjustFontSize(dir);
+		}
+
+	}, false);
 }
 
 MM.Mouse.handleEvent = function(e) {
@@ -5107,20 +5123,21 @@ MM.Mouse.handleEvent = function(e) {
 			if (item) { MM.Command.Edit.execute(); }
 		break;
 
-		case "contextmenu":
+		case "contextmenu":  // right click?
 			this._endDrag();
 			e.preventDefault();
 
 			var item = MM.App.map.getItemFor(e.target);
 			item && MM.App.select(item);
-
 			MM.Menu.open(e.clientX, e.clientY);
 		break;
 
 		case "touchstart":
-			if (e.touches.length > 1) { return; }			
-			e.clientX = e.touches[0].clientX;
-			e.clientY = e.touches[0].clientY;
+			// if (e.touches.length > 1) { return; }
+			
+			var k = e.touches.length - 1
+			e.clientX = e.touches[k].clientX;
+			e.clientY = e.touches[k].clientY;
 		case "mousedown":
 			var item = MM.App.map.getItemFor(e.target);
 			if (MM.App.editing) {
@@ -5130,12 +5147,12 @@ MM.Mouse.handleEvent = function(e) {
 
 			if (e.type == "mousedown") { e.preventDefault(); } /* to prevent blurring the clipboard node */
 
-			if (e.type == "touchstart") { /* context menu here, after we have the item */
-				this._touchTimeout = setTimeout(function() {
-					item && MM.App.select(item);
-					MM.Menu.open(e.clientX, e.clientY);
-				}, this.TOUCH_DELAY);
-			}
+			// if (e.type == "touchstart") { /* context menu here, after we have the item */
+			// 	this._touchTimeout = setTimeout(function() {
+			// 		item && MM.App.select(item);
+			// 		MM.Menu.open(e.clientX, e.clientY);
+			// 	}, this.TOUCH_DELAY);
+			// }
 
 			this._startDrag(e, item);
 		break;
@@ -5535,3 +5552,7 @@ MM.App = {
 		if (this.map) { this.map.ensureItemVisibility(this.current); }
 	}
 }
+
+
+
+// https://stackoverflow.com/questions/11183174/simplest-way-to-detect-a-pinch
