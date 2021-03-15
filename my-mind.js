@@ -1745,9 +1745,9 @@ MM.CS = {
 		this._port.addEventListener("mousedown", this);
 		this._dom.node.addEventListener("mousedown", this);
 		
-		if (typeof window.ontouchstart !== "undefined") {
-			this.close();
-		}
+		// if (typeof window.ontouchstart !== "undefined") {
+		// 	this.close();
+		// }
 	}
 }
 
