@@ -1698,56 +1698,58 @@ MM.Menu = {
 	}
 }
 
-// MM.CS = {
-// 	_dom: {},
-// 	_port: null,
+MM.CS = {
+	_dom: {},
+	_port: null,
 
-// 	open: function(x, y) {
-// 		MM.subscribe("CS", this);
-// 		// this._dom.node.style.display = true;
-// 		// var w = this._dom.node.offsetWidth;
-// 		// var h = this._dom.node.offsetHeight;
+	open: function(x, y) {
+		MM.subscribe("CS", this);
+		this._dom.node.style.display = true;
+		var w = this._dom.node.offsetWidth;
+		var h = this._dom.node.offsetHeight;
 
-// 		// var left = x;
-// 		// var top = y;
+		var left = x;
+		var top = y;
 
-// 		// if (left > this._port.offsetWidth / 2) { left -= w; }
-// 		// if (top > this._port.offsetHeight / 2) { top -= h; }
+		if (left > this._port.offsetWidth / 2) { left -= w; }
+		if (top > this._port.offsetHeight / 2) { top -= h; }
 
-// 		// this._dom.node.style.left = left+"px";
-// 		// this._dom.node.style.top = top+"px";
-// 	},
+		this._dom.node.style.left = left+"px";
+		this._dom.node.style.top = top+"px";
+	},
 	
-// 	handleEvent: function(e) {
+	handleEvent: function(e) {
 
 		
-// 		e.stopPropagation(); /* no dragdrop, no blur of activeElement */
-// 		e.preventDefault(); /* we do not want to focus the button */
+		e.stopPropagation(); /* no dragdrop, no blur of activeElement */
+		e.preventDefault(); /* we do not want to focus the button */
 		
-// 		var command = e.target.getAttribute("data-command");
-// 		if (!command) { return; }
+		var command = e.target.getAttribute("data-command");
+		if (!command) { return; }
 
-// 		command = MM.Command[command];
-// 		if (!command.isValid()) { return; }
+		command = MM.Command[command];
+		if (!command.isValid()) { return; }
 
-// 		command.execute();
-// 		// this.close();
-// 	},
+		command.execute();
+		// this.close();
+	},
 	
-// 	init: function(port) {
-// 		this._port = port;
-// 		this._dom.node = document.querySelector("#cs");
-// 		var buttons = this._dom.node.querySelectorAll("[data-command]");
-// 		[].slice.call(buttons).forEach(function(button) {
-// 			button.innerHTML = MM.Command[button.getAttribute("data-command")].label;
-// 		});
+	init: function(port) {
+		this._port = port;
+		this._dom.node = document.querySelector("#cs");
+		var buttons = this._dom.node.querySelectorAll("[data-command]");
+		[].slice.call(buttons).forEach(function(button) {
+			button.innerHTML = MM.Command[button.getAttribute("data-command")].label;
+		});
 		
-// 		this._port.addEventListener("mousedown", this);
-// 		this._dom.node.addEventListener("mousedown", this);
+		this._port.addEventListener("mousedown", this);
+		this._dom.node.addEventListener("mousedown", this);
 		
-// 		// this.close();
-// 	}
-// }
+		if (typeof window.ontouchstart !== "undefined") {
+			this.close();
+		}
+	}
+}
 
 MM.Command = Object.create(MM.Repo, {
 	keys: {value: []},
@@ -1799,7 +1801,7 @@ MM.Command.Redo.execute = function() {
 }
 
 MM.Command.InsertSibling = Object.create(MM.Command, {
-	label: {value: "Insert a sibling"},
+	label: {value: "Sibling"},
 	keys: {value: [{keyCode: 80}]}
 });
 MM.Command.InsertSibling.execute = function() {
@@ -1819,7 +1821,7 @@ MM.Command.InsertSibling.execute = function() {
 }
 
 MM.Command.InsertChild = Object.create(MM.Command, {
-	label: {value: "Insert a child"},
+	label: {value: "Child"},
 	keys: {value: [
 		{keyCode: 9, ctrlKey:false},
 		{keyCode: 45},
@@ -1837,7 +1839,7 @@ MM.Command.InsertChild.execute = function() {
 }
 
 MM.Command.Delete = Object.create(MM.Command, {
-	label: {value: "Delete an item"},
+	label: {value: "Delete"},
 	keys: {value: [{keyCode: 68, ctrlKey:true}]} // Mac keyboards' "delete" button generates 8 (backspace)
 });
 MM.Command.Delete.isValid = function() {
@@ -5529,7 +5531,9 @@ MM.App = {
 		// MM.Tip.init();
 		MM.Keyboard.init();
 		MM.Menu.init(this._port);
-		// MM.CS.init(this._port);
+		
+		MM.CS.init(this._port);
+		
 		MM.Mouse.init(this._port);
 		MM.Clipboard.init();
 
