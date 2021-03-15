@@ -1731,7 +1731,7 @@ MM.CS = {
 		if (!command.isValid()) { return; }
 
 		command.execute();
-		// this.close();
+		this.close();
 	},
 	
 	init: function(port) {
@@ -5529,10 +5529,10 @@ MM.App = {
 		this.notes = new MM.UI.Notes();
 
 		// MM.Tip.init();
+		MM.CS.init(this._port);
 		MM.Keyboard.init();
 		MM.Menu.init(this._port);
 		
-		MM.CS.init(this._port);
 		
 		MM.Mouse.init(this._port);
 		MM.Clipboard.init();
