@@ -37,13 +37,9 @@
 
 #cs {
 	position: fixed;
-	/* left:44.5%; */
-	/* right: 44.8%; */
-	/* display: none; */
 	display: inline-block;
-	left:  28%;
-	/* right: 28%; */
-	/* top:   96%; */
+	left:  50%;
+	transform: translate(-50%);
 	bottom: 0%;
 	z-index: 1;
 	/* border: 1px solid #666; */
