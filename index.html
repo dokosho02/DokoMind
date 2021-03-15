@@ -3,12 +3,13 @@
 	<head>
 		<meta charset="utf-8" />
 		<!-- <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0" /> -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 		
 		<title>DokoMind</title>
 		<link rel="icon" href="favicon.ico" />
 
 		<link rel="stylesheet" type="text/css" href="/vendor/pell/css/pell.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 		<script src="my-mind.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
@@ -24,21 +25,18 @@
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-383250-18"></script>
 
-<script> // commented by Doko
-//   window.dataLayer = window.dataLayer || [];
-//   function gtag(){dataLayer.push(arguments);}
-//   gtag('js', new Date());
-
-//   gtag('config', 'UA-383250-18');
-</script>
+<!-- <script> // commented by Doko
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-383250-18');
+</script> -->
 
 	</head>
 	
 	<body>
 		<ul id="port">
 			<div id="tip"></div>
-			<!-- <div id="tip">Type <code>:screenshot --selector .item</code> in Firefox Console to save the Map as an image! For more tips/news, follow <a href="https://twitter.com/my_mind_app">@my_mind_app</a>.</div> -->
-			<!-- <div id="tip">Press ‘Tab’ to Insert Child, ‘Enter’ to Insert Sibling Node. For more tips/news, follow <a href="https://twitter.com/my_mind_app">@my_mind_app</a>.</div> -->
 		</ul>
 
 		<div class="ui">
@@ -1299,11 +1297,13 @@
 
 		<div id="cs">
 			<p>
+				<button data-command="Full" title="F">F</button>
 				<button data-command="InsertChild" title="C">C</button>
 				<button data-command="InsertSibling" title="S">S</button>
 				<button data-command="Undo" title="U" value="U">U</button>
 				<button data-command="Redo" title="R">R</button>
 				<button data-command="Delete" title="D">D</button>
+
 			</p>
 
 		</div>
@@ -1335,21 +1335,6 @@
 			}
 		</script>
 		<!-- <script src="/vendor/pell/src/pell.min.js"></script> -->
-<!--
-TODO:
-  shortterm:
-
-  longterm:
-    - firebase realtime
-    - (custom) icons
-
-  bugs:
-
-  only as a request:
-	- firebase multiserver
-    - l11n
-    - custom css
--->
 
 	</body>
 </html>

@@ -757,7 +757,7 @@ MM.Item.prototype.removeChild = function(child) {
 	return this.update();
 }
 
-MM.Item.prototype.startEditing = function() {
+MM.Item.prototype.startEditing = function() {	  
 	this._oldText = this.getText();
 	this._dom.text.contentEditable = true;
 	this._dom.text.focus(); /* switch to 2b */
@@ -781,9 +781,7 @@ MM.Item.prototype.stopEditing = function() {
 	this._oldText = "";
 
 	this.update(); /* text changed */
-
 	MM.Clipboard.focus();
-
 	return result;
 }
 
@@ -1776,6 +1774,9 @@ MM.Command.Notes.execute = function() {
 	MM.App.notes.toggle();
 }
 
+
+
+
 MM.Command.Undo = Object.create(MM.Command, {
 	label: {value: "Undo"},
 	keys: {value: [{keyCode: "Z".charCodeAt(0), ctrlKey: true}]}
@@ -1953,7 +1954,21 @@ MM.Command.ZoomOut = Object.create(MM.Command, {
 });
 MM.Command.ZoomOut.execute = function() {
 	MM.App.adjustFontSize(-1);
-}
+};
+
+MM.Command.Full = Object.create(MM.Command, {
+	label: {value: "Full"},
+	keys: {value: []}
+});
+MM.Command.Full.execute = function() {
+	if (document.fullscreenElement){
+		document.exitFullscreen();
+	} else {
+		document.documentElement.requestFullscreen().catch((e) => {
+			console.log(e);
+		 });
+	}
+};
 
 MM.Command.Help = Object.create(MM.Command, {
 	label: {value: "Show/hide help"},
@@ -4234,6 +4249,7 @@ MM.UI.Help.prototype._build = function() {
 	this._buildRow(t, "Center");
 	this._buildRow(t, "ZoomIn", "ZoomOut");
 	this._buildRow(t, "Fold");
+	// this._buildRow(t, "Full");
 
 	var t = this._node.querySelector(".manipulation");
 	this._buildRow(t, "InsertSibling");
@@ -5094,14 +5110,6 @@ MM.Mouse.init = function(port) {
 	this._port.addEventListener("wheel", this);
 	this._port.addEventListener("mousewheel", this);
 	this._port.addEventListener("contextmenu", this);
-	this._port.addEventListener("click", function (e) {
-		if (e.detail === 3) {
-			document.documentElement.requestFullscreen().catch((e) => {
-				console.log(e);
-			 });
-		}
-	});
-
 	this._port.addEventListener('gestureend', function(e) {
 		
 		var dir = 0;
@@ -5126,6 +5134,17 @@ MM.Mouse.handleEvent = function(e) {
 			var item = MM.App.map.getItemFor(e.target);
 			if (MM.App.editing && item == MM.App.current) { return; } /* ignore on edited node */
 			if (item) { MM.App.select(item); }
+
+			// fullscreen and exit
+			if (e.detail === 4) {
+				if (document.fullscreenElement){
+					document.exitFullscreen();
+				} else {
+					document.documentElement.requestFullscreen().catch((e) => {
+						console.log(e);
+					 });
+				}
+			}
 		break;
 
 		case "dblclick":
