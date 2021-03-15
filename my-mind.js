@@ -5094,6 +5094,14 @@ MM.Mouse.init = function(port) {
 	this._port.addEventListener("wheel", this);
 	this._port.addEventListener("mousewheel", this);
 	this._port.addEventListener("contextmenu", this);
+	this._port.addEventListener("click", function (e) {
+		if (e.detail === 3) {
+			document.documentElement.requestFullscreen().catch((e) => {
+				console.log(e);
+			 });
+		}
+	});
+
 	this._port.addEventListener('gestureend', function(e) {
 		
 		var dir = 0;
