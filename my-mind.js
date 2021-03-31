@@ -1876,8 +1876,6 @@ MM.Command.Swap.execute = function(e) {
 MM.Command.Side = Object.create(MM.Command, {
 	label: {value: "Change side"},
 	keys: {value: [
-		// {keyCode: 37, ctrlKey:true},
-		// {keyCode: 39, ctrlKey:true},
 		{keyCode: 74},
 		{keyCode: 76}
 	]}
@@ -1892,7 +1890,7 @@ MM.Command.Side.execute = function(e) {
 }
 
 MM.Command.Save = Object.create(MM.Command, {
-	label: {value: "Save map"},
+	label: {value: "Save"},
 	keys: {value: [{keyCode: "S".charCodeAt(0), ctrlKey:true, shiftKey:false}]}
 });
 MM.Command.Save.execute = function() {
@@ -1908,7 +1906,7 @@ MM.Command.SaveAs.execute = function() {
 }
 
 MM.Command.Load = Object.create(MM.Command, {
-	label: {value: "Load map"},
+	label: {value: "Load"},
 	keys: {value: [{keyCode: "O".charCodeAt(0), ctrlKey:true}]}
 });
 MM.Command.Load.execute = function() {
@@ -1924,7 +1922,7 @@ MM.Command.Center.execute = function() {
 }
 
 MM.Command.New = Object.create(MM.Command, {
-	label: {value: "New map"},
+	label: {value: "New"},
 	keys: {value: [{keyCode: "N".charCodeAt(0), ctrlKey:true}]}
 });
 MM.Command.New.execute = function() {
