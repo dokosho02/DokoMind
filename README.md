@@ -12,4 +12,5 @@ New to Mind maps? They are useful, aesthetic and cool! Read more about these spe
 - Changing the app to dark mode;
 - Adding more Shapes;
 - Adding more operations to the Menu;
-- Changing the hotkeys to increase the efficiency of input on devices without physical keyboard.
+- Changing the hotkeys to increase the efficiency of input on devices without physical keyboard;
+- Adding buttons for touch screen devices.
